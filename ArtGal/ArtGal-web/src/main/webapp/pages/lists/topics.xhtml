@@ -1,0 +1,131 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	template="/WEB-INF/template/template.xhtml">
+
+	<ui:define name="content">
+		<section class="vbox" style="height: 100%; padding-bottom: 38.55%">
+			<section>
+				<section class="hbox stretch">
+					<header class="header bg-light lter hidden-print">
+						<p>Forum</p>
+					</header>
+					<h:form>
+						<table class="table">
+							<thead>
+								<tr>
+									<th>Topic Title</th>
+									<th>Category</th>
+									<th>Posted By</th>
+									<th></th>
+								</tr>
+							</thead>
+							<tbody>
+
+								<ui:repeat var="t" value="#{topicbean.allTopics}">
+									<tr>
+										<td>#{t.title}</td>
+										<td>#{t.category.name}</td>
+										<td>#{t.owner.userName}</td>
+										<td><h:commandLink class="btn btn-s-md btn-dark"
+												action="#{globalbean.goToTopicDetails()}"
+												value="Open Details">
+												<f:setPropertyActionListener
+													target="#{globalbean.selectedTopic}" value="#{t}" />
+											</h:commandLink></td>
+									</tr>
+								</ui:repeat>
+
+							</tbody>
+						</table>
+					</h:form>
+
+
+					<div class="col-md-12">
+						<h3 class="font-thin">Top Liked topics</h3>
+						<div class="list-group bg-white list-group-lg no-bg auto">
+							<ui:repeat var="t" value="#{topicbean.topFiveTopicsBylike()}">
+								<h:form>
+									<h:commandLink class="list-group-item clearfix"
+										action="#{globalbean.goToTopicDetails()}">
+										<span class="pull-right h3 text-muted m-l">#{globalbean.numLikesOfTopic(t)}<i
+											class="fa fa-heart text-danger"></i></span>
+										<span class="pull-left thumb-sm avatar m-r"> #{t.title}
+										</span>
+										<span class="clear"> <span>Posted :
+												#{t.creationDate.date} - #{(t.creationDate.month)+1} -
+												#{(t.creationDate.year)+1900}</span> <small
+											class="text-muted clear text-ellipsis">by
+												#{t.owner.userName}</small>
+										</span>
+										<f:setPropertyActionListener
+											target="#{globalbean.selectedTopic}" value="#{t}" />
+									</h:commandLink>
+								</h:form>
+							</ui:repeat>
+						</div>
+					</div>
+
+					<div class="col-md-12">
+						<h3 class="font-thin">Latest Topics Of The month</h3>
+						<div class="list-group bg-white list-group-lg no-bg auto">
+							<ui:repeat var="t"
+								value="#{topicbean.latestFiveTopicOfTheMonth()}">
+								<h:form>
+									<h:commandLink class="list-group-item clearfix"
+										action="#{globalbean.goToTopicDetails()}">
+										<span class="pull-right h3 text-muted m-l">#{globalbean.numLikesOfTopic(t)}<i
+											class="fa fa-heart text-danger"></i></span>
+										<span class="pull-left thumb-sm avatar m-r"> #{t.title}
+										</span>
+										<span class="clear"> <span>Posted :
+												#{t.creationDate.date} - #{(t.creationDate.month)+1} -
+												#{(t.creationDate.year)+1900}</span> <small
+											class="text-muted clear text-ellipsis">by
+												#{t.owner.userName}</small>
+										</span>
+										<f:setPropertyActionListener
+											target="#{globalbean.selectedTopic}" value="#{t}" />
+									</h:commandLink>
+								</h:form>
+							</ui:repeat>
+						</div>
+					</div>
+
+
+
+				</section>
+			</section>
+			<div style="padding-top: 3%; padding-left: 1%"></div>
+			<h3 class="font-thin">Topic Categories Popularity</h3>
+			<ui:repeat var="t" value="#{globalbean.categories}">
+				<div class="col-lg-3">
+					<section class="panel panel-default">
+						<div class="panel-body text-center">
+							<h4>#{t.name}</h4>
+							<div class="inline">
+								<div class="easypiechart easyPieChart"
+									data-percent="#{topicbean.categoryPercentagePopularity(t)}"
+									data-bar-color="#fcc633" data-line-width="16" data-loop="false"
+									data-size="188"
+									style="width: 188px; height: 188px; line-height: 188px;">
+									<div>
+										<span class="h2 m-l-sm step">#{topicbean.categoryPercentagePopularity(t)}</span>%
+									</div>
+									<canvas width="188" height="188"></canvas>
+								</div>
+							</div>
+						</div>
+
+					</section>
+				</div>
+			</ui:repeat>
+		</section>
+
+	</ui:define>
+	<ui:include src="/WEB-INF/template/footer.xhtml" />
+</ui:composition>
+

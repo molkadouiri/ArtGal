@@ -1,0 +1,63 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	template="/WEB-INF/template/template.xhtml">
+
+	<ui:define name="content">
+		<section class="vbox" style="height: 100%; padding-bottom: 38.55%">
+			<section>
+				<section class="hbox stretch">
+					<header class="header bg-light lter hidden-print">
+						<p>Forum</p>
+					</header>
+					<h:form>
+						<table class="table">
+							<thead>
+								<tr>
+									<th>Topic Title</th>
+									<th>Category</th>
+									<th>Posted By</th>
+									<th></th>
+								</tr>
+							</thead>
+							<tbody>
+
+								<ui:repeat var="t" value="#{globalbean.myTopics}">
+									<tr>
+										<td>#{t.title}</td>
+										<td>#{t.category.name}</td>
+										<td>#{t.owner.userName}</td>
+										<td><h:commandLink class="btn btn-s-md btn-dark"
+												action="#{globalbean.goToTopicDetails()}"
+												value="Open Details">
+												<f:setPropertyActionListener
+													target="#{globalbean.selectedTopic}" value="#{t}" />
+
+											</h:commandLink> <h:commandLink class="btn btn-s-md btn-info"
+												action="#{globalbean.goToAddOrUpdateTopic()}" value="Edit">
+												<f:setPropertyActionListener
+													target="#{globalbean.selectedTopic}" value="#{t}" />
+											</h:commandLink> <h:commandLink class="btn btn-s-md btn-danger"
+												action="#{topicbean.deleteTopic(t)}" value="Delete">
+
+											</h:commandLink></td>
+
+
+
+									</tr>
+								</ui:repeat>
+
+							</tbody>
+						</table>
+					</h:form>
+				</section>
+			</section>
+		</section>
+
+	</ui:define>
+	<ui:include src="/WEB-INF/template/footer.xhtml" />
+</ui:composition>
+

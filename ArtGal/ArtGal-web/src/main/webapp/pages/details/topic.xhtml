@@ -1,0 +1,162 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	template="/WEB-INF/template/template.xhtml">
+
+	<ui:define name="content">
+		<section class="vbox" style="height: 100%; padding-bottom: 8%">
+			<section>
+				<section class="hbox stretch">
+					<header class="header bg-light lter hidden-print">
+						<p>Forum</p>
+					</header>
+
+					<div class="row">
+						<div class="col-xs-6">
+							<h2>Title : #{globalbean.selectedTopic.title}</h2>
+							<br />
+							<h4>Post Date :
+								#{globalbean.selectedTopic.creationDate.date} -
+								#{(globalbean.selectedTopic.creationDate.month)+1} -
+								#{(globalbean.selectedTopic.creationDate.year)+1900}</h4>
+							<br />
+							<!-- 							<h:outputText -->
+							<!-- 								rendered="#{globalbean.selectedTopic.owner.id != loginbean.user.id}"> -->
+							<div>
+								<a class="pull-left thumb-sm"><img
+									src="../../resources/images/a0.png" class="img-circle"></img> </a>
+								<h4>Posted By : #{globalbean.selectedTopic.owner.userName}</h4>
+							</div>
+							<br />
+							<!-- 							</h:outputText> -->
+
+							<h4>Category : #{globalbean.selectedTopic.category.name}</h4>
+						</div>
+
+					</div>
+					<h:form>
+						<div class="">
+							<h2 class="post-title">
+
+								<a>Subject</a>
+								<h:commandLink
+									rendered="#{globalbean.topicLikedOrOwned(globalbean.selectedTopic).equals('yesLike')}"
+									class="btn btn-default btn-dark"
+									action="#{globalbean.likeTopic()}" value="like">
+									<span class="text"> <i
+										class="fa fa-thumbs-up text-success"></i>
+									</span>
+								</h:commandLink>
+
+
+
+							</h2>
+							<BR />
+							<div class="caption wrapper-lg" style="background-color: white;">
+								<div class="post-sum">
+									<p>#{globalbean.selectedTopic.description}</p>
+
+								</div>
+							</div>
+							<a class="btn btn-dark"><span class="text"> <i
+									class="fa fa-heart text-danger"></i>
+									#{globalbean.topicNumLikes}
+							</span> </a>
+
+							<div class="line line-lg"></div>
+
+						</div>
+					</h:form>
+
+					<h4 class="m-t-lg m-b" style="padding-left: 2%;">
+						<i class="fa fa-comment"> </i> #{globalbean.comments.size()}
+						comments
+					</h4>
+
+					<h:form>
+						<ui:repeat var="c" value="#{globalbean.comments}">
+							<div class="comment-body m-b" style="background-color: white">
+								<header>
+									<a class="pull-left thumb-sm"><img
+										src="../../resources/images/a0.png" class="img-circle"></img>
+										<strong>#{c.owner.userName}</strong> <h:commandLink
+											rendered="#{globalbean.commentOwned(c).equals('owned')}"
+											class="label bg-info m-l-xs"
+											action="#{globalbean.goToUpdateComment()}"
+											value="Edit Comment">
+											<f:setPropertyActionListener
+												target="#{globalbean.selectedComment}" value="#{c}" />
+										</h:commandLink> <h:commandLink
+											rendered="#{globalbean.commentOwned(c).equals('owned')}"
+											class="label bg-danger m-l-xs"
+											action="#{topicbean.deleteComment(c)}" value="Delete Comment">
+										</h:commandLink> </a> <span class="text-muted text-xs block m-t-xs">
+										#{c.creationDate.date} - #{(c.creationDate.month)+1} -
+										#{(c.creationDate.year)+1900} </span>
+								</header>
+								<BR />
+
+								<div class="m-t-sm">
+									<h3>#{c.description}</h3>
+								</div>
+							</div>
+							<div>
+								<div>
+									<h:commandLink
+										rendered="#{globalbean.commentLikedOrOwned(c).equals('yesLike')}"
+										class="btn btn-default btn-dark"
+										action="#{topicbean.likeComment(c.id)}" value="like">
+										<span class="text"> <i
+											class="fa fa-thumbs-up text-success"></i>
+										</span>
+									</h:commandLink>
+
+								</div>
+								<div>
+									<br></br> <a class="btn btn-dark"><span class="text">
+											<i class="fa fa-heart text-danger"></i>
+											#{globalbean.numLikesByComment(c.id)}
+									</span> </a> <br></br> <br />
+								</div>
+							</div>
+						</ui:repeat>
+					</h:form>
+
+
+
+
+
+					<h:form>
+						<h4 class="m-t-lg m-b">Leave a comment</h4>
+						<div class="form-group">
+							<BR />
+							<h:inputTextarea id="description"
+								value="#{topicbean.selectedComment.description}"
+								styleClass="form-control" rows="5" cols="12"
+								pt:placeholder="Type your comment" />
+
+						</div>
+						<div class="form-group">
+
+							<h:commandButton value="Submit
+								comment"
+								styleClass="btn btn-success">
+								<f:actionListener binding="#{topicbean.doAddOrUpdateComment()}" />
+
+							</h:commandButton>
+
+
+						</div>
+					</h:form>
+				</section>
+			</section>
+
+		</section>
+		<ui:include src="/WEB-INF/template/footer.xhtml" />
+
+	</ui:define>
+</ui:composition>
+

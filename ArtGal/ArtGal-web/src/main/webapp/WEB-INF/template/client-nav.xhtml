@@ -1,0 +1,65 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
+
+	<aside class="bg-black dk aside hidden-print" id="nav">
+		<section class="vbox">
+			<section class="w-f-md scrollable">
+
+				<div class="slim-scroll" data-height="auto"
+					data-disable-fade-out="true" data-distance="0" data-size="10px"
+					data-railOpacity="0.2">
+
+
+
+					<!-- nav -->
+					<nav class="nav-primary hidden-xs">
+						<h:form>
+							<ul class="nav" data-ride="collapse">
+								<li class="hidden-nav-xs padder m-t m-b-sm text-xs text-muted">
+									Menu</li>
+
+								<li><a href="#" class="auto"> <span
+										class="pull-right text-muted"> <i
+											class="fa fa-angle-left text"></i> <i
+											class="fa fa-angle-down text-active"></i>
+									</span> <i class="fa fa-indent icon"> </i> <span>Forum</span>
+								</a>
+
+									<ul class="nav dk text-sm">
+										<li><h:commandLink action="#{globalbean.goToAllTopics()}"
+												value="Topics" class="auto">
+												<i class="fa fa-angle-right text-xs"></i>
+											</h:commandLink></li>
+									</ul>
+									<ul class="nav dk text-sm">
+										<li><h:commandLink action="#{globalbean.goToMyTopics()}"
+												value="Manage My Topics" class="auto">
+												<i class="fa fa-angle-right text-xs"></i>
+											</h:commandLink></li>
+									</ul>
+
+									<ul class="nav dk text-sm">
+										<li><h:commandLink action="#{globalbean.goToAddTopic()}"
+												value="New Topic" class="auto">
+												<i class="fa fa-angle-right text-xs"></i>
+											</h:commandLink></li>
+									</ul></li>
+
+							</ul>
+						</h:form>
+
+					</nav>
+					<!-- / nav -->
+				</div>
+			</section>
+
+		</section>
+	</aside>
+
+</ui:composition>

@@ -1,0 +1,49 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	template="/WEB-INF/template/template.xhtml">
+
+	<ui:define name="content">
+		<section class="vbox" style="height: 100%; padding: 15%">
+			<section>
+				<section class="hbox stretch">
+					<div class="col-sm-12">
+						<section class="panel panel-default">
+							<header class="panel-heading font-bold"> Edit your
+								Comment </header>
+							<div class="panel-body">
+								<h:form>
+
+
+									<div class="form-group">
+										<h:outputText value="description" />
+										<h:inputTextarea id="description"
+											value="#{globalbean.selectedComment.description}"
+											styleClass="form-control" rows="5" cols="12" />
+									</div>
+
+									<br></br>
+									<div class="form-group">
+										<h:commandButton value="Update"
+											styleClass="btn btn-success col-sm-3">
+											<f:actionListener
+												binding="#{topicbean.doUpdateComment()}" />
+
+										</h:commandButton>
+									</div>
+								</h:form>
+							</div>
+						</section>
+					</div>
+				</section>
+			</section>
+
+		</section>
+		<ui:include src="/WEB-INF/template/footer.xhtml" />
+
+	</ui:define>
+</ui:composition>
+

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+<h:head>
+
+
+
+	<meta charset="utf-8" />
+	<title>Musik | Web Application</title>
+	<meta name="description"
+		content="app, web app, responsive, admin dashboard, admin, flat, flat ui, ui kit, off screen nav" />
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+
+	<link
+		href="#{request.contextPath}/resources/js/jPlayer/jplayer.flat.css"
+		type="text/css" rel="stylesheet" media="screen" />
+	<link href="#{request.contextPath}/resources/css/bootstrap.css"
+		type="text/css" rel="stylesheet" media="screen" />
+	<link href="#{request.contextPath}/resources/css/animate.css"
+		type="text/css" rel="stylesheet" media="screen" />
+	<link href="#{request.contextPath}/resources/css/font-awesome.min.css"
+		type="text/css" rel="stylesheet" media="screen" />
+	<link href="#{request.contextPath}/resources/css/simple-line-icons.css"
+		type="text/css" rel="stylesheet" media="screen" />
+	<link href="#{request.contextPath}/resources/css/font.css"
+		rel="stylesheet" type="text/css" />
+	<link href="#{request.contextPath}/resources/css/app.css"
+		rel="stylesheet" type="text/css" media="screen" />
+	<link rel="stylesheet"
+		href="#{request.contextPath}/resources/js/datepicker/datepicker.css"
+		type="text/css" />
+	<link rel="stylesheet"
+		href="#{request.contextPath}/resources/js/chosen/chosen.css"
+		type="text/css" />
+</h:head>
+
+
+
+<h:body class="">
+
+	<script type="text/javascript">
+					var currentPlaylist=[];
+</script>
+
+	<section class="vbox">
+		<ui:include src="/WEB-INF/template/header.xhtml" />
+
+		<section>
+			<section class="hbox stretch">
+
+
+				<ui:include src="/WEB-INF/template/client-nav.xhtml" />
+
+
+
+				<section id="content">
+
+
+
+					<ui:insert name="content">
+
+					</ui:insert>
+
+
+				</section>
+			</section>
+		</section>
+	</section>
+
+
+	<script
+		src="#{request.contextPath}/resources/js/datepicker/bootstrap-datepicker.js"></script>
+	<script src="#{request.contextPath}/resources/js/jquery.min.js"></script>
+	<!-- Bootstrap -->
+	<script src="#{request.contextPath}/resources/js/bootstrap.js"></script>
+	<!-- App -->
+	<script src="#{request.contextPath}/resources/js/app.js"></script>
+	<script
+		src="#{request.contextPath}/resources/js/slimscroll/jquery.slimscroll.min.js"></script>
+	<script
+		src="#{request.contextPath}/resources/js/charts/easypiechart/jquery.easy-pie-chart.js"></script>
+	<script
+		src="#{request.contextPath}/resources/js/charts/sparkline/jquery.sparkline.min.js"></script>
+	<script src="#{request.contextPath}/resources/js/app.plugin.js"></script>
+	<script type="text/javascript"
+		src="#{request.contextPath}/resources/js/jPlayer/jquery.jplayer.min.js"></script>
+	<script type="text/javascript"
+		src="#{request.contextPath}/resources/js/jPlayer/add-on/jplayer.playlist.min.js"></script>
+	<script type="text/javascript"
+		src="#{request.contextPath}/resources/js/jPlayer/demo.js"></script>
+
+	<!-- file input -->
+	<script type="text/javascript"
+		src="#{request.contextPath}/resources/js/file-input/bootstrap-filestyle.min.js"></script>
+
+
+	<script type="text/javascript">
+var myPlaylist = new jPlayerPlaylist({
+    jPlayer: "#jplayer_N",
+    cssSelectorAncestor: "#jp_container_N"
+  }, currentPlaylist, {
+    playlistOptions: {
+      enableRemoveControls: true,
+      autoPlay: true
+    },
+    swfPath: "js/jPlayer",
+    supplied: "webmv, ogv, m4v, oga, mp3",
+    smoothPlayBar: true,
+    keyEnabled: true,
+    audioFullScreen: false
+  });
+</script>
+
+</h:body>
+</html>
